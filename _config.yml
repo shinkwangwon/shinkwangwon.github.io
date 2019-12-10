@@ -27,7 +27,7 @@ navigation:
   - name: Archive
     url: /archive
   - name: Category
-    url: /category
+    url: /tags
   - name: Git
     url: https://github.com/shinkwangwon
 
