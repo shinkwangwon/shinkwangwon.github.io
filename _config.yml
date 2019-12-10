@@ -26,13 +26,13 @@ navigation:
   #  url: /about
   - name: Archive
     url: /archive
-  - name: Tags
-    url: /tags
+  - name: Category
+    url: /category
   - name: Git
     url: https://github.com/shinkwangwon
 
 # Pagination
-paginate: 5
+paginate: 10
 
 # Includes an icon in the footer for each username you enter
 footer-links:
