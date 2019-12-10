@@ -1,50 +1,14 @@
 ---
 layout: post 
-title: "Java Collection Basic"
+title: "Java HashMap"
 tags: [java]
 comments: true
 date: 2019-11-28
 ---
 
-## Collection Interface
-- 모든 Collection의 상위 인터페이스로써 핵심 메소드를 선언 (add, contain, isEmpty, remove, size, iterator ...)
-
-![collection](/assets/posts/20191122/java_collection.png)
-
-1. List
-- 요소들의 순서가 있으며, index를 사용하여 탐색/삽입하고 중복 값을 허용
-- ArrayList : 내부적으로 데이터를 배열로 관리하며 데이터의 추가/삭제시 임시 배열을 생성해서 데이터를 복사하는 방법을 사용함. 추가/삭제가 많을 경우 데이터의 복사가 많이 일어나서 성능이 느릴 수 있지만 인덱스를 알고 있기 때문에 접근하는데는 빠르다.
-- LinkedList : 각 데이터노드가 이전/다음 노드의 상태만 알고 있다. ArrayList와는 다르게 데이터 복사가 없기 때문에 추가/삭제시에 유리한 반면 검색시에는 처음부터 순회해야 하기 때문에 성능상 느릴 수 있다.
-- Vector : 가변 길이의 배열과 비슷하며 동기화(synchronized)를 지원한다. 배열용량이 초과하면 기존 사이즈의 2배로 늘린다. 2배로 늘려놓고 안쓸 수 있기 때문에 성능이 좋지 않을 수 있다.
-
-2. Set
-- 집합을 정의하며 요소의 중복을 허용하지 않음
-- HashSet : 순서를 전혀 알 수 없음. 임의의 접근 속도는 가장 빠름
-- LinkedHashSet : 추가된 순서대로 저장
-- TreeSet : 정렬된 순서로 저장하며 정렬방법을 지정할 수 있음
-
-3. Map
-- Key & Value 쌍으로 연관지어 저장하고, 중복을 허용하지 않음
-- HashMap : 해시테이블을 사용한 클래스, 중복을 허용하지않고 순서를 보장하지 않음, 키와 값으로 null을 허용
-- HashTable : HashMap보다는 느리지만 동기화를 지원(주요 Syncronized 키워드가 붙어있음), 키와 값으로 null 허용하지 않음
-- LinkedHashMap : 입력한 순서대로 저장, HashMap을 상속받기 때문에 HashMap과 거의 흡사
-- TreeMap : 정렬된 순서로 저장, 저장시 정렬하기 때문에 저장시간이 다소 오래 걸림
-
-## HashTable, HashMap, ConcurrentHashMap
-* HashTable
-  - 주요 메소드에 synchronized 키워드가 선언되어 있어서 동기화를 지원함(그렇기에 속도가 조금 느림)
-  - key, value에 null을 허용하지 않음 - key, value 둘중 하나라도 null이면 에러
-
-* HashMap
-  - synchronized 키워드가 없고, key,value에 null 입력 가능
-  - 개발자가 직접 synchronized 블록을 명시적으로 선언해서 사용은 가능
-
-* ConcurrentHashMap
-  - HashMap을 thread-safe하게 만든 클래스
-  - 다만, hashMap과 다르기 key, value에 null 허용하지 않음
-  - putIfAbsent(key, value) 라는 메소드를 제공함 - key 값이 존재하면 기존의 값을 반환하고 없다면 입력한 값을 저장한뒤 반환 
-
-
+## Hash란 ?
+- Hash 알고리즘에 대한 내용은 아래 내용 확인
+- [Hash 란?](https://shinkwangwon.github.io/hash/) 
 
 ## Java HashMap Algorithm
 * Java HashMap 에서 사용하는 방식은 seperate chaining 방식 
@@ -67,10 +31,7 @@ date: 2019-11-28
 - capacity를 증가시킨다는 것은 버킷의 크기를 늘리는 것(=메모리를 늘리는 것) 뿐만이 아니라 기존에 저장되어 있던 모든 데이터의 해시값을 다시 계산하여 버킷에 새롭게 배치하는 작업까지 해야한다. 이러한 과정을 리해싱 이라고 한다. 
 - 즉, 리해싱이란 capacity와 load_factor의 설정값에 따라 특정 시점에 버킷의 크기를 늘렸을 때(=메모리를 늘렸을 때 =capacity를 늘렸을 때. 다 같은말) 저장되어 있던 데이터의 해시값을 다시 계산하여 버킷에 재배치하는 것을 말한다.
 - HashMap 객체에 저장될 데이터의 개수가 어느 정도인지 예측 가능한 경우에는, capacity값을 HashMap의 생성자의 인자로 지정하여 불필요하게 Separate Chaining을 재구성하지 않게 할 수 있다.
-  
 
 
-
-#### 참고 
-- <http://blog.breakingthat.com/2018/05/07/java-collection-%EA%B0%9C%EC%9A%94-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/>
+#### 참고
 - <https://onsil-thegreenhouse.github.io/programming/java/2018/02/22/java_tutorial_HashMap_bucket/>
