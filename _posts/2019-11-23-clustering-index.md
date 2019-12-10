@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "클러스터링 인덱스"
-tags: [mysql, database]
+tags: [mysql]
 comments: true
 date: 2019-11-23
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "Spring 용어 정리"
-categories: spring
-use_math: true
+tags: [spring]
+comments: true
 date: 2019-12-06
 ---
 
