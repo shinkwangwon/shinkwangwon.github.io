@@ -1,0 +1,41 @@
+---
+layout: post
+title: "Spring 커맨드 객체(Command Object)"
+categories: spring
+date: 2019-11-26
+---
+
+## 스프링 커맨드 객체 (Command Object)
+1. 스프링 컨트롤러 단에서 커맨드 객체 사용
+    - 스프링에서 커맨드 객체란 HTTP 요청에 들어오는 속성값들을 자동으로 객체에 매핑해준 객체를 말한다.
+    - 즉, @RequestParam 을 이용해 각 속성값들을 하나씩 일일이 명시하는게 아니라 해당 컨트롤러에서 받을 수 있는 속성들을 하나의 클래스에 모아놓고 객체로 선언해 두는 것이다.
+    - 그럼 스프링은 요청들을 자동으로 커맨드 객체에 바인딩 해준다. 단, "set" + 속성명으로 이루어진 메소드를 기준으로 하기 때문에 속성마다 setter가 꼭 있어야 한다.
+2. 뷰단에서 커맨드 객체 사용
+    - RestController에서 어떤 클래스의 객체를 통째로 리턴했을때, 뷰단에서는 클래스명의 첫글자만 소문자로 바꾼 이름으로 사용가능하다.
+    - 해당 클래스에는 getter가 설정되어 있어야 하며, getter의 이름으로 뷰단에 내려감
+
+
+## @RequestMapping 
+- 속성 종류
+    - String[] value : URL패턴을 지정하는 속성, String배열로 여러개 지정 가능
+    - RequestMethod[] method : HTTP 메서드 정의 GET, POST, HEAD, OPTIONS, PUT, DELETE, TRACE 중 배열로 사용 가능
+    - String[] params : Request의 파라미터를 매핑조건으로 부여
+    - String[] produces : Response의 Content-Type을 제어할 수 있는 속성  
+
+    ```java
+    @RequestMapping(value = "/test", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+
+    // POST방식으로 /test1, /test2 로 오는 요청을 둘다 받음 
+    @RequestMapping(value = {"/test1", "/test2"}, method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+
+    // GET 방식의 요청 파리미터에 useYn 값이 Y 인 경우에만 아래 URL이 호출됨
+    @RequestMapping(value = "/test", method = RequestMethod.GET, params="useYn=Y")
+
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public Person getPerson(PersonRequest personRequest) {  // personRequest가 command Object 이다.
+        // personRequest객체를 통해 Person 조회 후 리턴
+    }
+
+    ```
+
