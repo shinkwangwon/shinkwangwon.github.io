@@ -20,8 +20,8 @@ avatar: /images/logo.png
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
 # it from the list(Delete '- name: ' and 'url: ', too!)
 navigation:
-  #- name: Blog
-  #  url: /
+  - name: Post
+    url: /
   #- name: About
   #  url: /about
   - name: Archive
