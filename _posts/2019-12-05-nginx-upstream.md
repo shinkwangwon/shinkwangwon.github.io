@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Nginx Upstream"
-categories: nginx
+tags: [nginx]
+comments: true
 date: 2019-12-05
 ---
 

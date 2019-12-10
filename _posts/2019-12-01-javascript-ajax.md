@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Javscript Ajax"
-categories: javascript
+tags: [javascript]
+comments: true
 date: 2019-12-01
 ---
 

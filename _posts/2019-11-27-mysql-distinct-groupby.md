@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "MySQL DISTINCT & GROUP BY"
-categories: mysql
+tags: [mysql]
+comments: true
 date: 2019-11-27
 ---
 

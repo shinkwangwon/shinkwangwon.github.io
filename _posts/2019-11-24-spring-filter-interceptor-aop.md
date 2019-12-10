@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Filter, InterCeptor, AOP 차이점"
-categories: spring
+tags: [spring]
+comments: true
 date: 2019-11-24
 ---
 

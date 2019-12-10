@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "MyBatis # , $ 차이"
-categories: mysql
+tags: [mybatis]
+comments: true
 date: 2018-02-02
 ---
 

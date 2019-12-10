@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "AngularJS Context"
-categories: angularjs
+tags: [angularjs]
+comments: true
 date: 2019-10-22
 ---
 

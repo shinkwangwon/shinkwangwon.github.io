@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Spring MethodInterCeptor & HandlerMethodArgumentResolver"
-categories: spring
+tags: [spring]
+comments: true
 date: 2019-11-26
 ---
 

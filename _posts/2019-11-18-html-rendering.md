@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "HTML 렌더링"
-categories: html
+tags: [html]
+comments: true
 date: 2019-11-18
 ---
 

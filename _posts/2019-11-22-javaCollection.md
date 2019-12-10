@@ -1,7 +1,8 @@
 ---
 layout: post 
 title: "Java Collection Basic"
-categories: java
+tags: [java]
+comments: true
 date: 2019-11-28
 ---
 

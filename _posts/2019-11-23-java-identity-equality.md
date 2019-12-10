@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Java 동일성(identity) 와 동등성(equality)"
-categories: java
+tags: [java]
+comments: true
 date: 2019-11-23
 ---
 

@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Transaction ACID"
-categories: database
+tags: [database]
+comments: true
 date: 2019-11-17
 ---
 

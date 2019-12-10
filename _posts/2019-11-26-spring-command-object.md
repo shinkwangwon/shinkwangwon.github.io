@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Spring 커맨드 객체(Command Object)"
-categories: spring
+tags: [spring]
+comments: true
 date: 2019-11-26
 ---
 
