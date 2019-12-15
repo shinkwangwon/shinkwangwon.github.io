@@ -46,14 +46,6 @@ list.forEach(x -> System.out.println(x));   // 직접 메소드 구현해서 전
 list.forEach(System.out::println);  // 이미 구현된 메소드 참조해서 바로 전달
 ```
 
-## Stream 특징
-- 스트림은 외부 반복을 통해 작업하는 컬렉션과는 달리 내부 반복(internal iteration)을 통해 작업을 수행
-- 스트림은 재사용이 가능한 컬렉션과는 달리 단 한 번만 사용 가능
-- 스트림은 원본 데이터를 변경하지 않음
-- 스트림의 연산은 필터-맵(filter-map) 기반의 API를 사용하여 지연(lazy) 연산을 통해 성능 최적화
-- 스트림은 parallelStream() 메소드를 통한 손쉬운 병렬 처리 지원 
-- 스트림 생성 - 중계 - 최종 연산을 거침
-
 
 #### 참고
 - <https://sehun-kim.github.io/sehun/java-lambda-stream/>
