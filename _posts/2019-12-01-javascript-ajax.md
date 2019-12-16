@@ -18,7 +18,8 @@ date: 2019-12-01
 
 
 ## Content-Type
-- 서버에서 클라이언트로 내려줄 때 지정할 수 있는 타입 
+- 클라이언트와 서버간에 데이터(body)를 전달할때 Http Header에 Content-Type을 지정함으로써 데이터 교환 타입을 맞추는 것을 말한다.
+
 
 ## Content-Disposition
 - 서버에서 내려주는 Response Header의 하나로써 파일 다운로드 처리하는 용으로 쓰임

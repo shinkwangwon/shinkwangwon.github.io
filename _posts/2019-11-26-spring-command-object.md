@@ -15,6 +15,12 @@ date: 2019-11-26
     - RestController에서 어떤 클래스의 객체를 통째로 리턴했을때, 뷰단에서는 클래스명의 첫글자만 소문자로 바꾼 이름으로 사용가능하다.
     - 해당 클래스에는 getter가 설정되어 있어야 하며, getter의 이름으로 뷰단에 내려감
 
+## @ModelAttribute
+- Spring의 컨트롤러단에서 Request Parameter로 @ModelAttribute 와 @RequestParam, @RequestBody 등을 주로 쓴다.
+- 여기서 @ModelAttribute는 객체타입을 요청 파라미터로 받을 경우에 사용하는데 이 @ModelAttribute에 선언한 객체를 커맨드 객체라고 말한다.
+- @RequestParam는 요청파라미터와 메소드의 파라미터가 1:1로 매핑되는 경우에 사용되고, 오브젝트 프로퍼티에 한번에 바인딩해서 요청파라미터를 받을 경우 @ModelAttribute를 사용한다.
+- @RequestParam, @ModelAttribute 어노테이션은 생략이 가능한데, 단일 변수인 경우에는 @RequestParam으로 간주되고 오브젝트형태인 경우에는 @ModelAttribute로 간주된다. 하지만 명확히 나타내기 위해 쓰는게 낫다.
+- @RequestBody는 요청 본문(body)를 통해 요청 파라미터를 받을 때 사용한다. @RequestParam 와 @ModelAttribute는 요청파라미터를 URL 쿼리스트링에 전달한다.
 
 ## @RequestMapping 
 - 속성 종류
@@ -34,7 +40,7 @@ date: 2019-11-26
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Person getPerson(PersonRequest personRequest) {  // personRequest가 command Object 이다.
+    public Person getPerson(PersonRequest personRequest) {  // personRequest가 command Object 이다. (@ModelAttribute 생략)
         // personRequest객체를 통해 Person 조회 후 리턴
     }
 
