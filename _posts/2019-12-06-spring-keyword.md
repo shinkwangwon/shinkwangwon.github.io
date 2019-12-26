@@ -39,8 +39,35 @@ date: 2019-12-06
 ### 싱글톤 레지스트리 (singletone registry)
 - 스프링이 직접 싱글톤 형태의 오브젝트를 만들고 관리하는 기능을 제공하는 것
 - 자바의 기본적인 싱글톤 패턴의 구현 방식은 여러 단점(스태틱 메소드와 private 생성자를 사용)이 있기 때문에 스프링은 직접 싱글톤을 관리
-- 싱글톤 레지스트르의 장점은 스태틱 메소드와 private 생성자를 사용해야하는 클래스가 아니라 평범한 자바 클래스를 싱글톤으로 활용하게 해준다.
+- 싱글톤 레지스트리의 장점은 스태틱 메소드와 private 생성자를 사용해야하는 클래스가 아니라 평범한 자바 클래스를 싱글톤으로 활용하게 해준다.
 - IoC방식으로 오브젝트를 관리하는 애플리케이션 컨텍스트가 이러한 기능을 제공한다.
+- 소스를 전부 까보지는 않았지만 스윽 보니 스프링에서는 싱글톤을 ConcurrentHashMap을 이용해서 관리하는 것 같더라.
+
+> 자바의 싱글톤 패턴의 한계
+> private 생성자를 갖고 있기 때문에 상속할 수 없다. 객체지향의 장점인 상속과 이를 이용한 다형성의 사용이 불가능하다. 
+> 싱글톤은 테스트하기가 힘들다. 테스트에서 사용될 목 오브젝트 등으로 대체하기가 힘들다. 생성자를 통해 주입이 불가능하기 때문에 테스트를 위한 직접 오브젝트를 만들어서 사용할 수 밖에 없다.
+> 서버환경에서는 싱글톤이 하나만 만들어지는 것을 보장하지 못한다. 
+> 싱글톤의 사용은 전역 상태를 만들 수 있기 때문에 바람직하지 못하다.
+> 아래 소스는 자바의 싱글톤 패턴을 만드는 방법 중 하나이다. 
+
+```java
+public class ThreadSafeSynchronized {
+	private static ThreadSafeSynchronized instance;
+	
+	private ThreadSafeSynchronized() {}
+	
+	public static ThreadSafeSynchronized getInstance() {
+		if(instance == null) {
+			synchronized(ThreadSafeSynchronized.class) {
+				if(instance == null) {
+					instance = new ThreadSafeSynchronized();	
+				}
+			}
+		}
+		return instance;
+	}
+}
+```
 
 
 ### 스프링 빈의 스코프

@@ -41,9 +41,9 @@ public class TestHandlerMethodArguementResolver implements HandlerMethodArgument
 
 
 
-## MethodInterCeptor
-- 스프링의 MethodInterCeptor는 공통기능을 하는 메소드를 만들고, AOP를 이용하여 원하는 포인트컷을 지정하여 수행시킬 수 있다.
-- MethodInterCeptor을 구현하려면 1개의 메소드를 반드시 구현해야 한다.
+## MethodInterceptor
+- 스프링의 MethodInterceptor는 공통기능을 하는 메소드를 만들고, AOP를 이용하여 원하는 포인트컷을 지정하여 수행시킬 수 있다.
+- MethodInterceptor를 구현하려면 1개의 메소드를 반드시 구현해야 한다.
 - Object invoke(MethodInvocation invocation) throws Throwable;
 - @Component 어노테이션으로 스프링 빈으로 등록되도록 함  
 ```java

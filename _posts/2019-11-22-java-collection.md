@@ -40,9 +40,29 @@ date: 2019-11-28
 3. Map
 - Key & Value 쌍으로 연관지어 저장하고, 중복을 허용하지 않음
 - HashMap : 해시테이블을 사용한 클래스, 중복을 허용하지않고 순서를 보장하지 않음, 키와 값으로 null을 허용
-- HashTable : HashMap보다는 느리지만 동기화를 지원(주요 Syncronized 키워드가 붙어있음), 키와 값으로 null 허용하지 않음
+- HashTable : HashMap보다는 느리지만 동기화를 지원(주요 Syncronized 키워드가 붙어있음), 키와 값으로 null 허용하지 않음 (NullPointerException)
 - LinkedHashMap : 입력한 순서대로 저장, HashMap을 상속받기 때문에 HashMap과 거의 흡사
 - TreeMap : 정렬된 순서로 저장, 저장시 정렬하기 때문에 저장시간이 다소 오래 걸림
+
+```java
+Map<String, String> hashMap = new HashMap<>();
+hashMap.put("a",  "aa");
+hashMap.put("a",  "bb");	// 중복허용 안함 : "bb"로 덮어 씌워짐
+hashMap.put(null, null);
+System.out.println(hashMap);	// {null=null, a=bb}
+
+Map<String, String> hashTable = new Hashtable<>();
+hashTable.put("a", "aa");
+hashTable.put("a", "bb");	// 중복허용 안함 : "bb"로 덮어 씌워짐
+// hashTable.put(null, null);	// ERROR: java.lang.NullPointerException
+System.out.println(hashTable);	// {a=bb}
+
+Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
+concurrentHashMap.put("a", "aa");
+concurrentHashMap.put("a", "bb");	// 중복허용 안함 : "bb"로 덮어 씌워짐
+// concurrentHashMap.put(null, null);	// ERROR: java.lang.NullPointerException
+System.out.println(concurrentHashMap);
+```
 
 ## HashTable, HashMap, ConcurrentHashMap
 * HashTable

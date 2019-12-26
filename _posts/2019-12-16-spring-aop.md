@@ -48,20 +48,20 @@ date: 2019-12-16
 - @Before : 타겟 메소드가 호출되기 전에 어드바이스 기능 수행
 - @After : 타겟 메소드의 결과에 관계없이(성공, 예외 관계없이) 타겟 메소드가 완료되면 어드바이스 기능 수행
 - @AfterReturning : 타겟 메소드가 성공적으로 결과값을 반환 후에 어드바이스 기능 수행
-- @AfterThrowing : 타겟 메소드가 수행중 예뢰를 던지게 되면 어드바이스 기능 수행
-- @Around : 어드바이스가 타겟메소드를 감싸서 타겟 메소드 호출전과 호출 후에 어드바이스 기능을 수행 - proceed()메서드를 호출시점을 기준으로 메소드 전과 후로 구분함
+- @AfterThrowing : 타겟 메소드가 수행중 예외를 던지게 되면 어드바이스 기능 수행
+- @Around : 어드바이스가 타겟메소드를 감싸서 타겟 메소드 호출전과 호출 후에 어드바이스 기능을 수행 - proceed()메서드 호출시점을 기준으로 메소드 전과 후로 구분함
 > 타겟메소드란, 실제 로직을 담고 있는 메소드를 말한다. 즉, 타겟 메소드는 기존로직을 수행하는 메소드를 말하고 타겟 메소드를 기준으로 특정 시점에 공통 기능을 가진 어드바이스를 수행시키는 것이 AOP다.
 
 ```java
 // 커스텀 어노테이션 생성
 @Retention(RetentionPolicy.RUNTIME) // 런타임시에도 참조할 수 있다.
 @Target(ElementType.TYPE)   // 클래스, 인터페이스단에 적용하겠다.
-public @interface TestLogging {
+public @interface TestLogging { // @interface 형식으로 어노테이션을 생성한다.
 }
 ```
 
 ```java
-@Aspect
+@Aspect // @Around와 같은 AspectJ 문법을 사용하기 위해 @Aspect 어노테이션을 부여한다.
 @Component
 public class TestLoggingAspectj {
     // TestLogging 어노테이션이 붙은 클래스 안의 모든 메소드를 호출할 때마다 호출 직전에 이 메소드가 수행된다.
