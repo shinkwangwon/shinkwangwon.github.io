@@ -46,10 +46,6 @@ System.out.println(silverPersonNameList);
 - 위의 예제에서 .map(Person::getName) 이 메소드 참조를 사용한 방식인데, 메소드 참조를 안쓰면 .map(p -> p.getName()) 과 같이 풀어써야 한다.
 - [Java 람다(Lambda)](https://shinkwangwon.github.io/java-lambda/) 
 
-## 원시타입 스트림
-- 자바 8에서는 int double같은 원시 타입을 지원하는 IntStream, DoubleStream과 같은 인터페이스도 제공한다.
-- 자바에서 원시타입 스트림을 사용하면 객체 생성 비용이 없기 때문에 데이터를 훨씬 효율적으로 처리할 수 있다.
-
 ## parallelStream()
 - 위 예제에서 stream() 대신 parallelStream()을 사용할 경우 처리를 병렬적으로 수행할 수 있다.
 - parallelStream() 메서드로 하는 병렬 처리는 내부적으로 ForkJoinPool.commonPool() 메서드에서 반환하는 공통 스레드 풀을 사용한다. 스레드 개수의 기본 값은 (CPU개수 - 1)개를 기본으로 한다.

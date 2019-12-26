@@ -12,7 +12,7 @@ date: 2018-02-02
 - SELECT * FROM user WHERE col = #{userId}
 - SELECT * FROM user WHERE col = ?
 - #부분이 ? 로 치환되면서 파라미터로 들어온 userId 값을 ? 에 대입하여 쿼리를 수행한다.
-- #일 경우 해당 부분에 작음 따옴표로 감싸진 상태로 값이 들어간다. ( SELECT * FROM user WHERE col = 'shin';)
+- #일 경우 해당 부분에 작은 따옴표로 감싸진 상태로 값이 들어간다. ( SELECT * FROM user WHERE col = 'shin';)
 - #일 경우는 작은따옴표로 감싸주기 때문에 SQL Injection 대비가 가능하다. 작은따옴표를 감싸주는 파싱작업을 하면서 SQLInjection의 코드를 만나면 오류가 발생한다.
 - ? 로 치환된 쿼리는 캐싱하고 있다가 다른 userId가 들어올 때에도 재사용 된다. 즉, SELECT * FROM user WHERE col = ? 이 쿼리를 캐싱하고 있다.
 - 단, 옵티마이저의 수행계획이 항상 동일하다는 것이 단점이다. 위 쿼리가 처음 캐싱될 때 col 이란 컬럼으로 인덱스가 스캔되면 그 다음부터 항상 인덱스가 타도록 결정된 상태로 캐싱된다는 것이다.

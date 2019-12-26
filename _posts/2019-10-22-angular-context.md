@@ -14,10 +14,10 @@ date: 2019-10-22
 
 ### $watch, $digest, $apply
 1. $watch
-- UI와 무언가를 바인딩하게 되면 항상 $watch list에 넣고 $watch는 이 리스트에 대한 변경을 감시한다.
+- UI와 javascript단의 모델을 바인딩하게 되면 모델을 $watch list에 넣고 $watch는 이 리스트에 대한 변경을 감시한다.
 - 디렉티브를 만들때도 바인딩이 있으면 $watch가 생성되는데, 디렉티브의 link절차에서 $watch가 생성된다.
   > - directive compile 단계 : HTML의 DOM 엘리먼트들을 돌면서 디렉티브를 찾는다. (attribute name, tag name, comments, class name을 이용하여 디렉티브를 매칭시킨다.) 결과로 link function을 리턴한다.
-  > - directive link 단계 : 디렉티브와 HTML이 상호작용(동적인 view) 할 수 있도록 디렉티브에 event listener를 등록하며 scope와 DOM 엘리먼트간에 2-way data binding을 위한 $watch를 설정한다. 위의 HTML Compiler의두 단계를 거쳐 HTML에서 디렉티브를 사용할 수 있게 됩니다.
+  > - directive link 단계 : 디렉티브와 HTML이 상호작용(동적인 view) 할 수 있도록 디렉티브에 event listener를 등록하며 scope와 DOM 엘리먼트간에 2-way data binding을 위한 $watch를 설정한다. 위의 HTML Compiler의 두 단계를 거쳐 HTML에서 디렉티브를 사용할 수 있게 됩니다.
 - $scope.$watch('name', function() {} ) 을 통해, 특정 모델을 지정하여 해당 모델이 변경되었을때 호출할 함수를 지정할 수 있음
 
 2. $digest

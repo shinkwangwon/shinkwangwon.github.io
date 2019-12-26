@@ -9,7 +9,7 @@ date: 2019-12-01
 ## Ajax (Asynchronous JavaScript and XML)
 - 비동기적으로 자바스크립트와 XML을 이용한 데이터 교환방식이다. (페이지를 리로딩하지 않고 데이터만 교환함)
 - JSON 형태로 작업을 하는 경우가 많아 XML보단 Json으로 데이터를 교환한다.
-- 참고 : https://victorydntmd.tistory.com/172
+- 참고 : <https://victorydntmd.tistory.com/172>
 - 대부분의 브라우저에는 XMLHttpRequest 라는 것이 내장되어 있다.
 - 초기에는 XML방식으로 HTTP 통신만 담당했다 (화면을 그리는 용도가 아님)
 - 그런데 XML을 조작하는것이 JS이기 때문에 XML을 다시 JS로 파싱해야하는 작업이 필요했다.
