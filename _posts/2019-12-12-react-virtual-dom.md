@@ -15,7 +15,7 @@ date: 2019-12-12
 - 외부 CSS파일과 각 HTML 엘리먼트의 inline 스타일을 파싱한다. 스타일 정보를 사용하여 Render Tree를 생성한다.
 - Webkit에서는 스타일을 처리하는 과정을 attachment라고 부른다. DOM트리의 모든 노드들은 'attach'라는 메소드가 있고 이 메소드는 스타일 정보를 계산해서 객체 형태로 반환한다.
 - 이 과정은 동기적으로 이루어지는 작업이고 DOM트리에 새로운 노드가 추가되면 그 노드의 attach메소드가 실행된다.
-- Render Tree를 만드는 과정에서는 각 요소들의 스타일이 계싼되고 이 과정에서 다른 요소들의 스타일 속성을 참고한다.
+- Render Tree를 만드는 과정에서는 각 요소들의 스타일이 계산되고 이 과정에서 다른 요소들의 스타일 속성을 참고한다.
 > Webket 이란 HTML, CSS, 자바스크립트로 이루어진 웹컨텐트를 렌더링하는 엔진을 말한다.
 
 3. Layout (reflow 라고도 부름)
@@ -34,7 +34,7 @@ date: 2019-12-12
 
 
 ## VirtualDOM 이란
-- VirtualDOM을 이용하면 실제 DOM에 접근하여 조작하는 대신에, 이를 추상화시킨 자바스크립트 객체를 구성하여 사용하여 DOM의 상태를 메모리에 저장하고 변경 전과 변경 후의 상태를 비교한 뒤 최소한의 내용만 반영 하는 기능
+- VirtualDOM을 이용하면 실제 DOM에 접근하여 조작하는 대신에, 이를 추상화시킨 자바스크립트 객체를 구성하여 DOM의 상태를 메모리에 저장하고 변경 전과 변경 후의 상태를 비교한 뒤 최소한의 내용만 반영 하는 기능
 - VirtualDOM은 DOM에 변화가 일어났을 때 변화된 것을 Virtual DOM에 먼저 적용시킨 후에 연산이 모두 끝나면 최종적인 변화를 실제 DOM에 던져주는데 이러한 과정을 딱 한번만 수행한다.
 - 즉, 일련의 변화를 하나로 묶어서 Virtual DOM에 적용시킨 후에, 기존의 DOM과 비교해서 변화된 부분만 리렌더링하도록 하는 작업을 **딱 한번만** 수행하는 것이다.
 - VirtualDOM은 DOM의 상태를 메모리 위에 계속 올려두고 DOM에 변경이 있을 때만 해당 변경을 반영한다.
@@ -43,9 +43,9 @@ date: 2019-12-12
 - 위에서 말한 것처럼 Virtual DOM에 변화를 먼저 적용시킨 후에 최종적인 변화를 한번만 딱 실제 DOM에 던져주는 것이 가장 큰 장점이다.
 - 이러한 작업은 DOM fragment를 이용하여 비슷하게 구현이 가능하다. 하지만 DOM fragment를 관리하는 것을 수동으로 작업을 해주어야 한다.
 - VirtualDOM은 이러한 과정을 자동화 해준다. 또한 DOM fragment를 관리하려면 기존 값에서 어떤 값이 바뀌었는지 안바뀌었는지 계속 파악하고 있어야 하는데 Virtual DOM은 이러한 것 또한 자동화 해준다.
-- DOM관리를 VirtualDOM이 하도록 함으로써, 컴포넌트가 DOM조작 요청을 할 때 다른 컴포넌트들과 상호작용을 하지 않아도 되고(특정 DOM을 조작할거다 라는 정보 공유가 필요없음), 각 변화들의 동기화 작업을 
+- DOM관리를 VirtualDOM이 하도록 함으로써, 컴포넌트가 DOM조작 요청을 할 때 다른 컴포넌트들과 상호작용을 하지 않아도 되고(특정 DOM을 조작할거다 라는 정보 공유가 필요없음), 각 변화들의 동기화 작업을 거치지 않으면서도 모든 작업을 하나로 묶어줄 수 있다.  
 > DocumentFragment 란, 웹 페이지에 객체를 생성할 때 생성 객체를 Body 에 넣기 전에 미리 만들어 두는 것을 말한다.
-> DocumentFragment는 일반적으로 DOM 서브트리를 조립해서 DOM에 삽입하기 위한 용도로 사용되고, 이 때 appendChild()나 insertBefore() 같은 Node 인터페이스의 메소드가 사용됩니다. 이 작업은 fragment의 노드들을 DOM으로 이동시키고, DocumentFragment를 비웁니다. 모든 노드들이 한꺼번에 문서에 삽입되기 때문에, 한 번의 리플로우와 렌더링만 일어납니다. 노드를 개별적으로 삽입할 때 매 노드마다 한 번씩 일어나는 것과는 대조적입니다.
+> DocumentFragment는 일반적으로 DOM 서브트리를 조립해서 DOM에 삽입하기 위한 용도로 사용되고, 이 때 appendChild()나 insertBefore() 같은 Node 인터페이스의 메소드가 사용된다. 이 작업은 fragment의 노드들을 DOM으로 이동시키고, DocumentFragment를 비운다. 모든 노드들이 한꺼번에 문서에 삽입되기 때문에, 한 번의 리플로우와 렌더링만 일어난다. 노드를 개별적으로 삽입할 때 매 노드마다 한 번씩 일어나는 것과는 대조적이다.
 > https://developer.mozilla.org/ko/docs/Web/API/DocumentFragment
 
 --------
@@ -92,7 +92,7 @@ date: 2019-12-12
 ## VirtualDOM 갱신 유형
 1. ReactComponent 객체의 상태가 변경될 때 하위에 있는 ReactComponent객체를 새로 만들지 않고 속성만 갱신하는 유형
 - ReactCompositeComponent 객체는 VirtualDOM이 같다면 속성만 갱신하고, 새로운 VirtualDOM이거나 VirtualDOM이 다르다면 기존의 VirtualDOM의 마운트를 해제하고 새로운 Virtual DOM을 만드는 작업을한다.
-- ReactDOMComponent 객체는 실제 DOM에서 변경이 필요한 부분을 갱신하는 작업을 한다. 변경된 ReactComponen 객체와 VirtualDOM이 같다면 속성만 갱신한다. props를 비교해 style속성과 event속성등을 비교해서 갱신한다.
+- ReactDOMComponent 객체는 실제 DOM에서 변경이 필요한 부분을 갱신하는 작업을 한다. 변경된 ReactComponent 객체와 VirtualDOM이 같다면 속성만 갱신한다. props를 비교해 style속성과 event속성등을 비교해서 갱신한다.
 
 2. 비교하는(=변경된) ReactComponent객체가 Virtual DOM이 다르다면 변경된 Virtual DOM의 마운트를 해제하고 모두 새로 만들어 갱신하는 유형
 - 먼저 기존 Virtual DOM의 마운트를 해제하고 Virtual DOM을 생성하며 자식 Virtual DOM이 있다면 Virtual DOM을 새로 생성해서 갱신한다.

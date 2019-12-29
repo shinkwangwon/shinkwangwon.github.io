@@ -57,13 +57,6 @@ date: 2019-12-03
 - Master -> Slave 구조로 하나의 Master에서 여러개의 Slave를 구동시켜 병렬로 처리하도록 함
 - partitioner에 지정한 작업을 먼저 수행한 후에 step으로 진입한다.
 - grid-size 에 지정한 개수만큼 Slave가 생성되서 병렬처리한다. 만약 gird-size=10 이고 처리할 데이터가 200개이면 각 slave는 20개씩 나눠서 처리한다.
-```xml
-<batch:step id="surveyShortUrlStepMaster">
-    <batch:partition step="surveyShortUrlStepSlave" partitioner="surveyShortUrlStepPartitioner">
-        <batch:handler grid-size="10" task-executor="asyncTaskExecutor" />
-    </batch:partition>
-</batch:step>
-```
 
 ## decision
 - 어떠한 작업의 결과에 따라 다음 Step을 진행할지 패스할지 아예 종료시킬지를 컨트롤 할 수 있다.
