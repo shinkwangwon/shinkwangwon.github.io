@@ -35,6 +35,8 @@ afterCompletion() - view페이지가 렌더링 되고 난 후
 ## AOP (Aspect Oriented Programming)
 - AOP란 중복된 기능을 공통기능으로 만들고, 개발자가 직접 원하는 위치에서 수행시킬 수 있는 프로그래밍
 - AOP는 Proxy형태로 사용된다 -> 어떤 메소드를 호출하면 proxy객체를 호출하게 되고 proxy객체는 설정해둔 공통기능도 하고 호출한 메소드 수행도 함
+- Interceptor나 Filter와는 달리 메소드 전후의 지점에 자유롭게 설정이 가능하다.
+- Interceptor와 Filter는 주소로 대상을 구분해서 걸러내야하는 반면, AOP는 주소, 파라미터, 애노테이션 등 다양한 방법으로 대상을 지정할 수 있다.
 - joinPoint 중에서 조건을 만족하는 pointCut을 찾아 advice를 weaving 한다.
 - joinPoint : pointcut의 후보 리스트
 - pointCut : 실제로 공통 기능을 수행시킬 위치
