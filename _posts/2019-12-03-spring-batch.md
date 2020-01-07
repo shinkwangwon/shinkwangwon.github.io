@@ -50,7 +50,7 @@ date: 2019-12-03
 ## Chunk 
 - reader -> processor -> writer 의 과정을 수행하기 위한 단위로써 commit-interval에 지정한 숫자만큼 writer에 쌓이면 실제 DB로 커밋된다.
 - 기본적으로 reader -> processor은 데이터를 한건씩 읽어와서 처리한 후 writer에 넘기는데 성능상 문제가 있으므로 writer는 처리된 결과물을 모아뒀다가 한번에 commit하기 위해 사용한다. (reader는 PagingItemReader를 이용해 한번에 읽어올 데이터 개수를 변경할 수 있다.)
-- 트랜잭션의 단위로 쓰이기도 하며 commit-interval=10 으로 설정하고 200개의 데이터를 처리한다고 했을 때, 중간에 오류가 발생하면 10개만 처리된 것들은 coommit되고 현재 처리중인 10개만 롤백된다.
+- 트랜잭션의 단위로 쓰이기도 하며 commit-interval=10 으로 설정하고 200개의 데이터를 처리한다고 했을 때, 중간에 오류가 발생하면 처리된 것들은 commit되고 현재 처리중인 10개만 롤백된다.
 
 ## Partitioner
 - Step을 병렬로 처리할 때 사용 
