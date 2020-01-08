@@ -25,19 +25,18 @@ class Member {
     private Team team;  // 객체 참조로 테이블간의 관계를 표현 
 }
 ```
-
 - 이런 경우에 SQL을 직접적으로 사용하여 조회한 경우, member.getTeam() 과 같은 메소드로 team객체를 사용할 수 있는지는 쿼리를 직접 까봐야 알 수 있다.
 > member.getTeam() 처럼 member 객체에서 참조하고 있는 team 을 찾는 것을 객체 그래프 탐색이라고 한다.
 - SELECT 쿼리에서 team 객체에 대한 데이터를 조인해서 가지고 오고 있는지, 가지고 온다면 team 객체중에 어떤 속성값들을 조회하는지 일일이 봐야 team 객체를 사용할 수 있을지 없을지 알 수 있다.
 - 즉, SQL을 직접 다루면 처음 실행하는 SQL에 따라 객체 그래프를 어디까지 탐색할 수 있는지 정해지고, 결국엔 그 SQL을 살펴봐야 어디까지 탐색할 수 있는지 알 수 있다.
 - JPA는 연관된 객체를 사용하는 시점에 적절한 SELECT SQL을 실행한다. 위와 동일하게 Member, Team이 있을 때 team = member.getTeam()을 호출하고 team 객체를 실제로 사용하는 시점에 DB에 SELECT 쿼리를 날려서 Team 객체를 조회해 온다. 이러한 기능은 실제 객체를 사용하는 시점까지 DB조회를 미룬다고 해서 **지연로딩**이라 한다. SQL을 직접사용하는 것과는 다르게 JPA가 자동으로 적절한 시점에 Team 객체를 조회해주기 때문에 개발자는 SQL에 덜 의존하게 된다.
 
+
 4. 동일성 비교(equality)
 - 동일선 비교는 == 비교로 객체 인스턴스의 주소 값을 비교하는 것을 말한다.
 - 논리적으로 DB에서 똑같은 Row를 두번 조회한 경우에 두 객체는 같은 객체라고 볼 수 있다.
 - 아래와 같이 같은 memberId로 2번 조회해서 mem1, mem2 객체에 저장했다. 하지만 getMember 메소드가 새로운 인스턴스를 반환하기 때문에 mem1과 mem2는 서로 다른 인스턴스가 된다.
 - 이런 문제를 해결하기 위해 데이터베이스의 같은 Row를 조회할 때마다 같은 인스턴스를 반환하도록 구현하는 것은 쉽지 않다. 여기에 여러 트랜잭션이 동시에 실행되는 상황까지 고려하면 더더욱 구현하기가 어려워진다.
-
 ```java
 // Member를 조회하는 메소드를 아래와 같이 작성했다고 하자.
 public Member getMember(String memberId) {
@@ -50,14 +49,13 @@ Member mem1 = memberDao.getMember(memberId);
 Member mem2 = memberDao.getMember(memberId);
 mem1 == mem2; // false
 ```
-
 - JPA는 같은 트랜잭션일 때 같은 객체가 조회되는 것을 보장한다. JPA에서는 엔티티를 Persistence Context(영속성 컨텍스트)가 관리하기 때문에 같은 쿼리에 대해 같은 인스턴스가 참조되는 것을 보장하는데 이를 동일성 보장 이라 한다. ( [JPA (Java Persistence API)](https://shinkwangwon.github.io/JPA/) 를 참고하자)
+
 
 5. 객체 상속
 - 자바에서 객체는 상속이라는 기능을 가지고 있다. 하지만 DB 테이블에는 상속이라는 기능이 없다.
 > 일부 데이터베이스는 상속 기능을 지원한다고 하지만 객체의 상속과는 약간 다르다고 한다.
 - 객체지향적인 개발을 위해 상속구조로 객체모델링을 했다고 하자. 이런 경우 SQL을 직접 사용할 때 코드량이 많아지고 개발자가 실수할 확률이 더 높아진다. 아래 예를 보자.
-
 ```java
 class Item {
     Long id;
