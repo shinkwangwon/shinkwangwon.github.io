@@ -38,7 +38,6 @@ class Member {
 - 아래와 같이 같은 memberId로 2번 조회해서 mem1, mem2 객체에 저장했다. 하지만 getMember 메소드가 새로운 인스턴스를 반환하기 때문에 mem1과 mem2는 서로 다른 인스턴스가 된다.
 - 이런 문제를 해결하기 위해 데이터베이스의 같은 Row를 조회할 때마다 같은 인스턴스를 반환하도록 구현하는 것은 쉽지 않다. 여기에 여러 트랜잭션이 동시에 실행되는 상황까지 고려하면 더더욱 구현하기가 어려워진다.
 
-
 ```java
 // Member를 조회하는 메소드를 아래와 같이 작성했다고 하자.
 public Member getMember(String memberId) {
@@ -53,8 +52,6 @@ mem1 == mem2; // false
 ```
 
 - JPA는 같은 트랜잭션일 때 같은 객체가 조회되는 것을 보장한다. JPA에서는 엔티티를 Persistence Context(영속성 컨텍스트)가 관리하기 때문에 같은 쿼리에 대해 같은 인스턴스가 참조되는 것을 보장하는데 이를 동일성 보장 이라 한다. ( [JPA (Java Persistence API)](https://shinkwangwon.github.io/JPA/) 를 참고하자)
-
-
 
 5. 객체 상속
 - 자바에서 객체는 상속이라는 기능을 가지고 있다. 하지만 DB 테이블에는 상속이라는 기능이 없다.
@@ -81,7 +78,6 @@ class Book extends Item {
 > INSERT INTO BOOK...
 - 조회쿼리에서도 JPA는 빛을 발하는데 SQL을 직접사용할 경우에 ITEM, BOOK 테이블을 조인하는 쿼리를 만들어서 Book 객체를 조회해와야한다. JPA에서는 조회를 위한 find메소드를 사용할 경우 jpa.find(Book.class, id); 자동으로 두 테이블을 조인해서 데이터를 조회해 온다.
 > SELECT I.*, B.* FROM ITEM I JOIN BOOK B ON I.ITEM_ID = B.ITEM_ID; 와 같은 쿼리를 생성해 낸다.
-
 
 
 
