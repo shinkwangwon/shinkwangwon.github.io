@@ -22,7 +22,7 @@ date: 2020-01-28
 - 참고 JSX 문법 규칙 https://react-anyone.vlpt.us/03.html
 - HTML이랑 비슷해보이지만 javascript로 변환됨
 - 규칙이 몇가지 있음
-  * 태그는 꼭 닫혀있어야 함 ex: <div> 태그를 열었으면 반드시 </div> 로 닫아주어야 함. <input type="text"> 에서 실수를 많이함 <input type="text"/> 이렇게 self closingTag 를 붙이도록 함
+  * 태그는 꼭 닫혀있어야 함 ex: \<div\> 태그를 열었으면 반드시 \</div\> 로 닫아주어야 함. \<input type="text"\> 에서 실수를 많이함 \<input type="text"/\> 이렇게 self closingTag 를 붙이도록 함
   * 두개 이상의 엘리먼트는 무조건 하나의 엘리먼트로 감싸져 있어야 함
   * JSX 안에서 자바스크립트 값 사용할 때는 {} 를 이용
   * render() 메소드에서는 반드시 jsx를 리턴해줘야함
@@ -164,6 +164,8 @@ export default Counter;
 
 
 ## React LifeCycle
+![No image](/assets/posts/20200210/react_lifecycle.png)
+
 1. Mounting : 컴포넌트가 처음 브라우저 상에 나타날 때 실행
 - constructor : 컴포넌트가 처음 브라우저 상에 나타날때 실행됨
 - getDerivedStateFromProps : props로 받은 값을 state로 동기화시킬 때 사용(state 상태를 변경하고 싶을 때)
@@ -223,7 +225,7 @@ export function setColor(color) { // 외부에서 액션을 가져다 쓰도록 
 - 기존 상태를 복사하고 변화를 준 다음에 반환
 - 리듀서 정의
 
-1. 리듀서의 초기상태를 정의
+- 1) 리듀서의 초기상태를 정의
 
 ```javascript
 const initialState = { // 상수 형태로 정의해놓음
@@ -232,7 +234,8 @@ const initialState = { // 상수 형태로 정의해놓음
 };
 ```
 
-2. 리듀서를 정의 (옛날방식임 - 새로운방식으로는 redux-actions의 createAction과 handleActions를 이용 - 아래 redux-action 참고)
+- 2) 리듀서를 정의 (옛날방식임 - 새로운방식으로는 redux-actions의 createAction과 handleActions를 이용 - 아래 redux-action 참고)
+
 ```javascript
 export default function counter(state = initialState, action) { // 이전상태값인 state와 action을 파라미터로 받음
 
@@ -244,7 +247,8 @@ switch(action.type) {
 }
 ```
 
-3. 리듀서를 합침 : 여러개의 리듀서를 정의했으면 리듀서를 하나로 합침 (redux의 combineReducers를 이용)
+- 3) 리듀서를 합침 : 여러개의 리듀서를 정의했으면 리듀서를 하나로 합침 (redux의 combineReducers를 이용)
+
 ```javascript
 import { combineReducers } from 'redux';
 const reducers = combineReducers({정의한 리듀서들 나열});
@@ -256,7 +260,7 @@ export default reducers;
 ## Store
 - 스토어가 하는일은 dispatch(action) - 액션을 리듀서로 보내는 것
 - dispatch가 실행되면 스토어는 리듀서에 현재 자신의 상태와 전달받은 액션을 리듀서로 보냄 -> 그럼 리듀서가 어떤 변화가 필요한지 보고 새 상태를 리턴해줌
-1. store.dispatch() 메소드 인자로 액션을 넘길 경우, 스토어는 액션을 리듀서로 보내서 실행하게 함
+- 1) store.dispatch() 메소드 인자로 액션을 넘길 경우, 스토어는 액션을 리듀서로 보내서 실행하게 함
 
 ```javascript
 // setMyAgentInfo는 액션
@@ -278,7 +282,7 @@ export default handleActions({
 }, initialState)
 ```
 
-2. store.dispatch() 메소드 인자로 함수를 넘길 경우, redux-chunk 미들웨어가 함수인것을 인지하여 dispatch, getState를 넣어서 실행해줌
+- 2) store.dispatch() 메소드 인자로 함수를 넘길 경우, redux-chunk 미들웨어가 함수인것을 인지하여 dispatch, getState를 넣어서 실행해줌
 
 ```javascript
 // store.dispatch() 인자로 함수를 넘김
@@ -358,7 +362,7 @@ export const getBaseApi = (code) => {
 
 ## react-redux
 - react-redux가 제공하는 기능중 하나인 Provider 컴포넌트
-- <Provider> : provider 컴포넌트는 connect() 함수를 사용하여 "연결(connect)"할 수 있도록 앱의 store를 "제공(provide)"함. (Provider 는 컴포넌트에서 리덕스를 사용하도록 서비스를 제공해줌)
+- Provider 컴포넌트는 connect() 함수를 사용하여 "연결(connect)"할 수 있도록 앱의 store를 "제공(provide)"함. (Provider 는 컴포넌트에서 리덕스를 사용하도록 서비스를 제공해줌)
 
 ```javascript
 ReactDOM.render(
