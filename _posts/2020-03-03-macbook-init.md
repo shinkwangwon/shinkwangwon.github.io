@@ -95,7 +95,6 @@ date: 2020-03-03
 
 - 3) 2번에 해당하는 파일이 없다면 스크립트 수동삽입한다. 위 쉘파일중 하나 만들고 vi로 아래 내용 집어넣는다.
 > export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \|\| printf %s "${XDG_CONFIG_HOME}/nvm")"  
-
 > [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 - 4) 쉘스크립트 재시작
