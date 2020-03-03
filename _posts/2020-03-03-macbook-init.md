@@ -94,9 +94,9 @@ date: 2020-03-03
   * 만약 ~/.bash_profile 또는 ~/.profile  또는 ~/.bashrc 의 파일이 이미 존재할 경우에 자동으로 nvm관련 스크립트를 해당 파일중 한곳으로 넣어준다. 나같은 경우는 위에서 jdk 설치하면서 ~/.bash_profile 파일을 생성했기 때문에 자동으로 nvm관련 스크립트가 ~/.bash_profile에 들어와 있다. 
 
 - 3) 2번에 해당하는 파일이 없다면 스크립트 수동삽입한다. 위 쉘파일중 하나 만들고 vi로 아래 내용 집어넣는다.
-> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"  
+> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \|\| printf %s "${XDG_CONFIG_HOME}/nvm")"  
 
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+> [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 - 4) 쉘스크립트 재시작
 > source ~/.bash_profile
