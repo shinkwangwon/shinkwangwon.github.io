@@ -75,7 +75,7 @@ date: 2020-03-03
 - macOS 10.15 (x86, 64-bit), DMG Archive 버전으로 설치한다.
 - 설치시 별다른 행동을 안했다면 아마도 /usr/local/mysql/ 에 설치됐을 것이다.
 - cd /usr/local/mysql/bin
-- sodu ./mysql -u root -p 
+- sudo ./mysql -u root -p 
 - 아, 만약에 실행이 안되면 mysql이 stop 상태일 수도 있다. mac 시스템 환경설정 들어가면 MySQL 아이콘이 보일 것이다. 실행시켜주자
 
 ## MySQL Workbench
@@ -88,13 +88,14 @@ date: 2020-03-03
 - 이 URL에서 nvm 설치 스크립트를 가져올 수 있다. <https://github.com/nvm-sh/nvm#install--update-script>
 - 터미널창에서 아래 명령어들을 하나씩 수행하자. 물론 다 위의 사이트에서 가져온 스크립트다.
 - 1) nvm 설치스크립트 수행)
-> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh \| bash
 
 - 2) nvm 스크립트 자동 삽입 
   * 만약 ~/.bash_profile 또는 ~/.profile  또는 ~/.bashrc 의 파일이 이미 존재할 경우에 자동으로 nvm관련 스크립트를 해당 파일중 한곳으로 넣어준다. 나같은 경우는 위에서 jdk 설치하면서 ~/.bash_profile 파일을 생성했기 때문에 자동으로 nvm관련 스크립트가 ~/.bash_profile에 들어와 있다. 
 
 - 3) 2번에 해당하는 파일이 없다면 스크립트 수동삽입한다. 위 쉘파일중 하나 만들고 vi로 아래 내용 집어넣는다.
-> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"  
+
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 - 4) 쉘스크립트 재시작
