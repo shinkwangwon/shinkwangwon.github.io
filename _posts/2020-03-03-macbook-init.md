@@ -15,11 +15,11 @@ date: 2020-03-03
 
 ## git 설치
 - Xcode 깔면 자동으로 깔린다
-- 터미널창 열어서 git --version 명령어로 git 설치되어 있는지 먼저 확인하고 안깔려 있으면 <https://12bme.tistory.com/164> 에서 다운로드
+- 터미널창 열어서 git \-\-version 명령어로 git 설치되어 있는지 먼저 확인하고 안깔려 있으면 <https://12bme.tistory.com/164> 에서 다운로드
 - 깃 계정 설정
-- git config --global user.name "your name"
-- git config --global user.email "your email"
-- 확인 git config --list
+- git config \-\-global user.name "your name"
+- git config \-\-global user.email "your email"
+- 확인 git config \-\-list
 
 
 ## IntelliJ
@@ -37,7 +37,7 @@ date: 2020-03-03
 - 다운받고 설치하면 자동으로 /Library/Java/JavaVirtualMachines 이 위치에 jdk가 설치될 때도 있고 아닐 때도 있다.
 - jdk가 다운로드받은 폴더에 그대로 있다면 이 위치로 옮겨주자
 > mv ~/Download/jdk-11.0.6.jdk /Library/Java/JavaVirtualMachines/
-- 설치확인 :  java --version
+- 설치확인 :  java \-\-version
 - 만약 제대로 명령이 실행이 안되면 환경변수 잡아줘보자
 - 1) 사용자위치에 .bash_profile 생성 
 ![No image](/assets/posts/20200303/jdk1.png)
@@ -93,7 +93,7 @@ date: 2020-03-03
 - 2) nvm 스크립트 자동 삽입 
   * 만약 ~/.bash_profile 또는 ~/.profile  또는 ~/.bashrc 의 파일이 이미 존재할 경우에 자동으로 nvm관련 스크립트를 해당 파일중 한곳으로 넣어준다. 나같은 경우는 위에서 jdk 설치하면서 ~/.bash_profile 파일을 생성했기 때문에 자동으로 nvm관련 스크립트가 ~/.bash_profile에 들어와 있다. 
 
-- 3) 2번에 해당하는 파일이 없다면 스크립트 수동삽입한다. 위 쉘파일중 하나 만들고 vi로 아래 내용 집어넣는다.
+- 3) 2번에 해당하는 파일이 없다면 스크립트 수동삽입한다. 위 쉘파일중 하나 만들고 vi로 아래 두줄 내용 집어넣는다.
 > export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" \|\| printf %s "${XDG_CONFIG_HOME}/nvm")"  
 > [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
