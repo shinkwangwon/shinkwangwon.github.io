@@ -120,6 +120,19 @@ date: 2020-03-03
 - 그럼 터미널창 열어서 docker -v 명령어로 제대로 설치됐는지 확인하면 된다.
 ![No image](/assets/posts/20200303/docker1.png)
 
+## gradle
+- gradle 다운로드 <https://gradle.org/releases/>
+- v6.2.2 complete 다운로드 후 압축 해제
+- 압축해제한 디렉토리 원하는 위치로 이동 /Users/shinkwangwon/gradle-6.2.2 위치로 뒀음
+- 환경변수 설정
+- $ vi ~/.bash_profile
+- 아래 내용 추가
+- # GRADLE
+- export GRADLE_HOME=/Users/shinkwangwon/gradle-6.2.2
+- export PATH=${PATH}:/$GRADLE_HOME/bin
+- 재시작
+- $ source ~/.bash_profile
+
 ## 그외 설치할만 한 것들
 - VSCode 설치: <https://code.visualstudio.com/download>
 - sublimeText: <https://www.sublimetext.com/3>
