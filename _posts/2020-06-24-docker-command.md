@@ -25,7 +25,7 @@ date: 2020-06-24
 - docker images 명령실행시 IMAGE ID에 해당하는 값
 
 ## docker image 전체 삭제
-- docker rmi $(docker images -q) 또는 docker rmi `docker images -q`
+- docker rmi $(docker images -q) 또는 docker rmi \`docker images -q\`
 
 ## docker 실행
 - docker run [옵션] {실행할 이미지명}
@@ -36,13 +36,13 @@ date: 2020-06-24
 
 ## docker container 삭제
 - docker rm {containerID}
-- docker ps -a 명령 실행시 ONTAINER ID에 해당하는 값
+- docker ps -a 명령 실행시 CONTAINER ID에 해당하는 값
 
 ## docker 종료된 container 한번에 삭제
 - docker rm -v $(docker ps -a -q -f status=exited)
 
 ## docker container 전부 삭제
-- docker rm $(docker ps -a -q) 또는 docker rm `docker ps -a -q`
+- docker rm $(docker ps -a -q) 또는 docker rm \`docker ps -a -q\`
 
 ## docker 컨테이너 중지
 - docker stop {containerID}
