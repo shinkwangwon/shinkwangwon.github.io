@@ -117,7 +117,7 @@ spec:
     3. **timeoutSeconds**: probe 의 타임아웃 값. 디폴트 값은 1초. 최소 값은 1초.
     4. **successThreshold**: probe 가 성공되어야 할 연속 성공 최소 임계치. 디폴트 값은 1. 최소 값은 1.
     5. **failureThreshold**: probe 가 실패 했을 때, 쿠버네티스는 이 수치만큼 시도함. 디폴트 값은 3. 최소 값은 1. 이 수치 만큼 시도해도 성공하지 못한다면, liveness는 컨테이너를 재시작하고 readiness는 Pod 을 unready 상태로 마킹함.
-  - 참고 : https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
+  - 참고 : [Configure Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes)
 
 ## 재시작 정책
 - 컨테이너 health check에 대해 실패한 경우, 비정상 종료된 경우에 따른 재시작 정책
