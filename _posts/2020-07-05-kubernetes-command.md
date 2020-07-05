@@ -15,7 +15,7 @@ date: 2020-07-05
 - FLAG : 부가적으로 설정할 옵션
 
 ## 자원 확인
-- pod, service, deployment 등 확인 : kubectl get { pods | services | deployments }
+- pod, service, deployment 등 확인 : kubectl get { pods \| services \| deployments }
 - pod, service 등 동시에 확인 : kubectl get pods,services
 - pod, service 등 설정 내용 확인
     - yaml 포맷으로 확인 : kubectl get pods ${pod_name} -o yaml
@@ -52,10 +52,9 @@ date: 2020-07-05
 - kubectl delete service ${service_name}
 
 ## 컨테이너 실행
-
 - kubectl run ${deployment_name} \-\-image ${image_name} \-\-port=${port_num}
     - kubectl run으로 pod를 실행시킬 때 기본 컨트롤러는 deployment이다.
-- kubectl { apply | create } -f ${yaml template file}
+- kubectl { apply \| create } -f ${yaml template file}
     - yaml 템플릿 파일을 먼저 생성한 후 템플릿을 통한 컨테이너 실행
 
 ## Context
