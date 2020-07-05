@@ -25,7 +25,7 @@ spec:
     ports:
     - containerPort: 80  # 컨테이너에 접속할 포트 지정 
   - name: test  # 이렇게 "-"(하이픈)을 통해 또다른 컨테이너를 정의할 수 있다.
-		#...
+  #...
 ```
 
 - .metadata.labels
@@ -75,8 +75,11 @@ spec:
     - readinessProbe가 실패한 경우 pod는 재시작되지는 않고 추후 정상화가 되면 다시 서비스에 투입되어 트래픽을 받는다.
     - 최초 readinessProbe를 하기 전까지의 기본 상태값은 Failure이다. readinessProbe를 지원하지 않는 컨테이너라면 기본 상태값은 Success이다.
     - readinessProbe를 지원하면 기본 상태값이 Failure이기 때문에 컨테이너가 실행된 다음 바로 서비스에 투입되서 트래픽을 받지 않는다. 트래픽을 받을 준비가 되었음을 확인한 후 트래픽을 받는다.
+    - 애플리케이션이 외부 서비스에 의존하는 경우, 외부 서비스로 인해 일시적으로 트래픽을 처리할 수 없는 경우가 있다. 이런 경우에 해당 readinessProbe를 통해 컨테이너가 트래픽을 받지 않도록 서비스에서 제외시킬 수 있다.
+    - livenessProbe를 통해 health check가 실패하는 경우, 재시작 정책에 따라 컨테이너가 재시작된다. 근데, 이때 livenessProbe health check 실패사유가 서비스가 불가능한 것이라면 재시작을 하더라도 또 컨테이너는 죽을 것이다. 이런 상황을 위해 서비스가 불가능한 경우에는 컨테이너를 재시작할 필요없이 트래픽을 받지 않도록 하기 위해 readinessProbe를 사용한다.
 - startupProbe
     - 컨테이너 내의 어플리케이션이 시작됐는지를 체크한다. startupProbe가 설정된 경우, 성공할 때 까지 나머지 Probe들은 활성화 되지 않는다.  startupProbe 가 실패하면 kubelet은 컨테이너를 다운시키고 재시작 정책에 따라 처리된다. startupProbe 이 없는 경우 기본상태는 Success이다.
+    - 컨테이너가 정상 동작하기까지 initialDelaySeconds + failureThreshold * periodSeconds 만큼의 시간을 벌 수 있다. 오래된 legacy 시스템으로 애플리케이션이 구동하는데 오래걸리는 서비스의 경우 startupProbe를 통해 컨테이너가 구동되기 까지의 시간을 벌 수 있다.
 
     ```yaml
     apiVersion: v1
@@ -108,6 +111,13 @@ spec:
     #      tcpSocket:
     #        port: 8080
     ```
+- probe 설정시 사용가능한 옵션들
+    1. **initialDelaySeconds**: 컨테이너가 시작되고 나서 대기가 필요한 경우 필요. 설정한 초 만큼 대기한 이후에 liveness 와 readiness probe 가 수행됨. 디폴트 값은 0초. 최소값은 0초
+    2. **periodSeconds**: probe 의 주기. 디폴트 값은 10초. 최소 값은 0초.
+    3. **timeoutSeconds**: probe 의 타임아웃 값. 디폴트 값은 1초. 최소 값은 1초.
+    4. **successThreshold**: probe 가 성공되어야 할 연속 성공 최소 임계치. 디폴트 값은 1. 최소 값은 1.
+    5. **failureThreshold**: probe 가 실패 했을 때, 쿠버네티스는 이 수치만큼 시도함. 디폴트 값은 3. 최소 값은 1. 이 수치 만큼 시도해도 성공하지 못한다면, liveness는 컨테이너를 재시작하고 readiness는 Pod 을 unready 상태로 마킹함.
+  - 참고 : https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#configure-probes
 
 ## 재시작 정책
 - 컨테이너 health check에 대해 실패한 경우, 비정상 종료된 경우에 따른 재시작 정책
@@ -136,7 +146,7 @@ spec:
   - name: init-myservice
     image: busybox:1.28
     command: ['sh', '-c', 'sleep 2; echo init !!;']
-	containers:   # 앱 컨테이너 정의
+  containers:   # 앱 컨테이너 정의
   - name: myapp-container
     image: busybox:1.28
     command: ['sh', '-c', 'echo The app is running! && sleep 3600']
@@ -164,6 +174,15 @@ spec:
         memory: "128Mi"
         cpu: "500m"
 ```
+- SI prefix
+    - 1,000 (10^3) 배수가 기준
+    - E, P, T, G, M, K
+    - 현재 SI , IEC 표기가 뒤엉켜 쓰이고 있다. 정석인 표현으로 2^10을 나타내는 것은 명확하게 i 를 붙여 표기해야한다.
+- IEC prefix
+    - 1,024 (2^10) 배수가 기준
+    - Ei, Pi, Ti, Gi, Mi, Ki
+- ex) 128,974,848 Byte, 129M, 123Mi 세가지는 대략적으로 동일한 값을 나타낸다.
+
 
 ## Pod 환경변수 설정
 
