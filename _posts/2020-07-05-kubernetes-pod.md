@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Kubernetes pod"
+title: "Kubernetes Pod"
 tags: [kubernetes]
 comments: true
 date: 2020-07-05
 ---
 
-# Pod
+# Kubernetes Pod
 - 쿠버네티스는 pod라는 단위로 컨테이너를 묶어서 관리한다.
 - pod안에 여러개의 컨테이너를 생성하고 관리할 때 컨테이너들은 IP하나를 공유해서 사용한다. pod안의 컨테이너와 통신할 때는 포트번호를 다르게 설정하여 통신한다.
 
@@ -85,18 +85,18 @@ spec:
     spec:
       containers:
       - name: liveness
-    		...
-    		args:
+        ...
+        args:
         - /bin/sh
         - -c
         - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
         livenessProbe:
-    			exec:   # health check를 위해 ExecAction 방식 사용
+          exec:   # health check를 위해 ExecAction 방식 사용
             command:
-    				- cat
+            - cat
             - /tmp/healthy
 
-    #		livenessProbe:   # HttpGetAction 방식
+    #   livenessProbe:   # HttpGetAction 방식
     #      httpGet:
     #        path: /healthz
     #        port: 8080
@@ -104,7 +104,7 @@ spec:
     #        - name: Custom-Header
     #          value: Awesome
 
-    #		readinessProbe:  # TCPSocketAction 방식
+    #   readinessProbe:  # TCPSocketAction 방식
     #      tcpSocket:
     #        port: 8080
     ```
@@ -175,18 +175,18 @@ metadata:
 spec:
   containers:
   - name: simple-pod
-		env:       # 환경변수 필드 정의 
-		- name: TEST_ENV     # 사용할 환경변수 이름 설정
-			value: "testvalue" # 문자열이나 숫자형식의 값 설정
-		- name: POD_NAME
-			valueFrom:  # 직접할당이 아닌 참조를 위한 설정
-				fieldRef: # pod의 현재 설정 내용을 값으로 사용하겠다는 설정
-					fieldPath: metadata.name  # 값을 참조하려는 위치를 지정
-		- name: CPU_REQ
-			valueFrom:
-				resourceFieldRef:  # 컨테이너에 Resource 할당량에 대한 정보를 가져오는 설정 
-					containerName: simple-pod  # 컨테이너 지정
-					resource: requests.cpu     # 가져올 resource 지정
+    env:       # 환경변수 필드 정의 
+    - name: TEST_ENV     # 사용할 환경변수 이름 설정
+      value: "testvalue" # 문자열이나 숫자형식의 값 설정
+    - name: POD_NAME
+      valueFrom:  # 직접할당이 아닌 참조를 위한 설정
+        fieldRef: # pod의 현재 설정 내용을 값으로 사용하겠다는 설정
+          fieldPath: metadata.name  # 값을 참조하려는 위치를 지정
+    - name: CPU_REQ
+      valueFrom:
+        resourceFieldRef:  # 컨테이너에 Resource 할당량에 대한 정보를 가져오는 설정 
+          containerName: simple-pod  # 컨테이너 지정
+          resource: requests.cpu     # 가져올 resource 지정
 ```
 
 - 실행중인 pod의 환경설정을 바로 적용하는 것은 불가하다. 기존 pod를 삭제한 후 재실행 해야한다.
