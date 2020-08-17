@@ -30,7 +30,7 @@ spec:
         app.kubernetes.io/instance: http-server-${USER}
     spec:
       containers:
-      - image: registry.navercorp.com/ncc-sample/simple-http-server:latest
+      - image: #image url
         name: my-pod
         args:
         - --port=80
