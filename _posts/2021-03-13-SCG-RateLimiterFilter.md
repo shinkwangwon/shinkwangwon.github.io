@@ -23,7 +23,7 @@ date: 2021-03-13
 
 ```yaml
 spring:
-	...
+  ...
 
   cloud:
     gateway:
@@ -33,7 +33,7 @@ spring:
           deny-empty-key: true
           # 키를 찾지 못한 경우 403 Forbidden 대신 429 Too Many Request로 응답
           empty-key-status-code: 429
-	...
+  ...
 ```
 
  
@@ -71,7 +71,7 @@ logging:
     root: DEBUG
 
 spring:
-	# Redis 연동을 위한 설정
+  # Redis 연동을 위한 설정
   redis:
     host: localhost
     port: 6379
