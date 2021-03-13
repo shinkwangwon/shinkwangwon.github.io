@@ -14,20 +14,18 @@ date: 2021-03-13
 - Spring Boot 2.x, Spring WebFlux 및 Project Reactor를 기반으로 동작
     - Asynchronous / Non-Blocking 방식의 Netty 기반 Runtime 으로 동작하기 때문에 WAR로 빌드된 경우에는 작동하지 않음
 
-![No image](/assets/posts/20210313/BlockingIO.png)
+
+![No image](/assets/posts/20210313/blockingIO.png)
 
 ![No image](/assets/posts/20210313/NonBlockingIO.png)
 
 ![No image](/assets/posts/20210313/Framework.png)
 
 ## 용어
-
 1. Route
-
 - 목적지 URI, 조건부(Predicate) 집합, Filter 집합으로 정의되며, 조건부에 일치해야 해당 경로로 라우팅 됨
 
 2. Predicate
-
 - 라우팅를 결정하기 위한 조건
 - AND 조건으로 조합할 수 있음
 - Path : 주로 쓰는 predicate로 이 옵션에 지정한 path로 들어오는 경우, 해당 라우터로 라우팅
@@ -36,13 +34,13 @@ date: 2021-03-13
 - [https://woooongs.tistory.com/55](https://woooongs.tistory.com/55)
 
 3. Filter
-
 - 요청 전/후의 Request, Response 를 수정할 수 있음. (필터는 해당 라우터에 한정)
 - 특정 factory 로 구성된 Spring Framework GatewayFilter 인스턴스
 - AddResponseHeader GatewayFilter Factory, AddRequestParameter GatewayFilter Factory 등등
 - 많은 종류의 Filter Factory 가 있기 때문에 아래 문서 참고하여 필요한 Filter 검색
 - [https://cloud.spring.io/spring-cloud-gateway/reference/html/#gatewayfilter-factories](https://cloud.spring.io/spring-cloud-gateway/reference/html/#gatewayfilter-factories)
 - [https://woooongs.tistory.com/55](https://woooongs.tistory.com/55)
+
 
 ![No image](/assets/posts/20210313/SCGflow.png)
 
@@ -88,19 +86,19 @@ spring:
           predicates:
             - Path=/server1/**
           filters:
-						# Short Cut 방식 
+            # Short Cut 방식 
             # - AddRequestParameter=seq, 13579
-						# - Cookie=mycookie,mycookievalue
+            # - Cookie=mycookie,mycookievalue
 
-						# Fully Expanded 방식. filter종류에 따라 args의 name이 달라짐
+            # Fully Expanded 방식. filter종류에 따라 args의 name이 달라짐
             - name: AddRequestParameter
               args:
                 name: seq
                 value: 13579
-						- name: Cookie
-		          args:
-		            name: mycookie
-		            regexp: mycookievalue
+            - name: Cookie
+              args:
+                name: mycookie
+                regexp: mycookievalue
 ```
 
 ## Filter Pre/Post 적용 순서
