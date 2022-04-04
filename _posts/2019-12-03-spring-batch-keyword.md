@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spring Batch 용어 정리"
-tags: [spring_batch]
+tags: [spring batch]
 comments: true
 date: 2019-12-03
 ---
@@ -26,19 +26,15 @@ date: 2019-12-03
 - JobParameter는 Job이 실행될 때 필요한 파라미터들을 Map타입으로 지정하는 객체이다.
 - JobParameter는 JobInstance를 구분하는 기준이 되기도 한다. (JobParameter와 JobInstance는 1:1 관계)
 
-## Step
-- Step은 실질적인 배치 처리를 정의하고 제어하는데 필요한 모든 정보가 있는 도메인 객체이다. 
-- 모든 Job에는 1개 이상의 Step이 있어야 한다. Step은 Job을 처리하는 실질적인 단위로 쓰인다.
-
 ## StepExecution
 - Step의 실행정보를 담는 객체이다.
 
 ## JobRepository
-- JobRepository는 배치 처리에 대한 메타데이터를 저장하고 있다. 어떤 Job이 실행되었으면 몇 번 실행되었고 언제 끝났는지 등에 대한 정보를 저장하고 있다.
-- Job 하나가 실행되면 JobRepository는 배치 실행 관련된 정보를 가지고 있는 JobExecution과 Step 실행 정보를 담고 있는 StepExecution을 생성하고 관리하는 역할을 수행한다.
+- JobRepository 컴포넌트는 다양한 배치 수행과 관련된 수치 데이터(시작 및 종료시간, 상태, 읽기/쓰기 횟수등)뿐만 아니라 잡의 상태를 유지 관리함
+- 스텝 내의 청크 처리가 완료될 때마다 JobRepository 내에 있는 JobExecution 또는 StepExecution을 현재 상태로 갱신함 (청크 단위마다 갱신). 현재까지의 커밋 수, 시작 및 종료시간, 기타 정보등이 JobRepository에 저장됨
 
 ## JobLauncher
-- JobLauncher는 Job과 JobParameter을 통해 배치를 실행하는 인터페이스이다.
+- 잡을 실행하는 역할을 담당. Job.execute 메서드를 호출하는 역할 이외에도, 잡의 재실행 가능여부 검증, 잡의 실행방법, 파라미터 유효성 검증 등의 처리를 수행
 
 ## ItemReader, ItemProcessor, ItemWriter
 - 하나의 Step은 (ItemReader, ItemProcessor, ItemWriter) 한 쌍을 가질 수 있다.
@@ -60,6 +56,26 @@ date: 2019-12-03
 
 ## decision
 - 어떠한 작업의 결과에 따라 다음 Step을 진행할지 패스할지 아예 종료시킬지를 컨트롤 할 수 있다.
+
+## Step
+- Step은 실질적인 배치 처리를 정의하고 제어하는데 필요한 모든 정보가 있는 도메인 객체이다. 
+- 모든 Job에는 1개 이상의 Step이 있어야 한다. Step은 Job을 처리하는 실질적인 단위로 쓰인다.
+- 스텝은 독립적인 단위로 실행됨. 하나의 Job이 여러 스텝을 실행할 때도 각 스텝은 완전히 독립적인 단위로 실행됨 
+- 스텝도 하나의 Bean 으로 등록되기 때문에 다른 Job에서 재사용이 가능함
+- 스텝의 청크단위도 독립적인 트랜잭션 단위로 실행됨 
+- 단순한 작업을 하는 태스크릿 기반 스텝인 Tasklet 으로 스텝을 구현할 수도 있고, 청크 기반 스텝인 ItemReader, ItemProcessor, ItemWriter로 구성할 수 도 있음  
+- Tasklet은 스텝이 중지될때 까지 execute 메서드를 반복해서 호출하는데, execute 메서드가 호출될때마다 독립적인 트랜잭션이 생성됨
+
+## @EnableBatchProcessing
+- 이 애너테이션은 배치 인프라스트럭처를 부트스트랩하는데 사용
+- 배치 인프라스트럭처를 위한 대부분의 스프링 빈 정의를 제공 하므로 다음과 같은 컴포넌트를 직접 포함 시킬 필요없음
+  - JobRepository : 실행 중인 잡의 상태를 기록하는데 사용됨
+  - JobLauncher : 잡을 구동하는데 사용됨
+  - JobExplorer : JobRepository를 사용해 읽기 전용 작업을 수행하는데 사용됨
+  - JobRegistry : 특정한 런처 구현체를 사용할 때 잡을 찾는 용도로 사용됨
+  - PlatformTransactionManager : 잡 진행 과정에서 트랜잭션을 다루는데 사용됨
+  - JobBuilderFactory : 잡을 생성하는 빌더
+  - StepBuilderFactory : 스텝을 생성하는 빌더
 
 
 #### 참고
