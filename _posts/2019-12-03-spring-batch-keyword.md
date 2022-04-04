@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Spring Batch 용어 정리"
-tags: [spring batch]
+tags: [SpringBatch]
 comments: true
 date: 2019-12-03
 ---

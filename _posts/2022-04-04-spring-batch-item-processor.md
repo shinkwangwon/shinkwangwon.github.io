@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "ItemProcessor"
-tags: [spring batch]
+tags: [SpringBatch]
 comments: true
 date: 2022-04-04
 ---
