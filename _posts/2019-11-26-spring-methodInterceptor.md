@@ -44,14 +44,14 @@ public class TestHandlerMethodArguementResolver implements HandlerMethodArgument
 ## MethodInterceptor
 - 스프링의 MethodInterceptor는 공통기능을 하는 메소드를 만들고, AOP를 이용하여 원하는 포인트컷을 지정하여 수행시킬 수 있다.
 - MethodInterceptor를 구현하려면 1개의 메소드를 반드시 구현해야 한다.
-- Object invoke(MethodInvocation invocation) throws Throwable;
+- Object intercept(Object var1, Method var2, Objectp[] var3, MethodProxy var4) throws Throwable;
 - @Component 어노테이션으로 스프링 빈으로 등록되도록 함  
 ```java
 @Component
 public class TestMethodInterceptor implements MethodInterceptor {
 
     @Override
-	public Object invoke(MethodInvocation invocation) throws Throwable {
+	Object intercept(Object var1, Method var2, Objectp[] var3, MethodProxy var4) throws Throwable {
         // 여기서 대상 객체 메소드 수행 전에 할 작업을 수행
         // 작업~~~
 
