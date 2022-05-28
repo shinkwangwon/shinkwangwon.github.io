@@ -39,9 +39,9 @@ date: 2019-11-28
 
 3. Map
 - Key & Value 쌍으로 연관지어 저장하고, 중복을 허용하지 않음
-- HashMap : 해시테이블을 사용한 클래스, 중복을 허용하지않고 순서를 보장하지 않음, 키와 값으로 null을 허용
-- HashTable : HashMap보다는 느리지만 동기화를 지원(주요 Syncronized 키워드가 붙어있음), 키와 값으로 null 허용하지 않음 (NullPointerException)
-- LinkedHashMap : 입력한 순서대로 저장, HashMap을 상속받기 때문에 HashMap과 거의 흡사
+- HashMap : 해시테이블을 사용한 클래스, 중복을 허용하지않고 순서를 보장하지 않음, 키와 값으로 null을 허용, 동기화 지원안함(동기화를 원할땐 ConcurrentHashMap 사용), 보조해시함수를 사용해 해시충돌을 줄임.
+- HashTable : HashMap보다는 느리지만 동기화를 지원(주요 Syncronized 키워드가 붙어있음), 동기화를 지원하기 때문에 싱글스레드 환경에서는 HashMap에 비해 성능이 느림, 키와 값으로 null 허용하지 않음 (NullPointerException)
+- LinkedHashMap : 입력한 키의 순서대로 저장, HashMap을 상속받기 때문에 HashMap과 거의 흡사
 - TreeMap : 정렬된 순서로 저장, 저장시 정렬하기 때문에 저장시간이 다소 오래 걸림
 
 ```java
